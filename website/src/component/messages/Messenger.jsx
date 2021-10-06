@@ -9,6 +9,7 @@ import {
 } from "react-bootstrap";
 import Convo from "../conversation/Convo";
 import Chatbox from "../chat/Chatbox";
+import Online from "../chatOnline/Online";
 
 const Messenger = () => {
   return (
@@ -42,7 +43,14 @@ const Messenger = () => {
             </Form>
           </Col>
         </Col>
-        <Col sm={3}>Hi</Col>
+        <Col sm={3}>
+          <Online />
+          <Online />
+          <Online />
+          <Online />
+          <Online />
+          <Online />
+        </Col>
       </Row>
     </Container>
   );
