@@ -1,6 +1,14 @@
 import "./messenger.css";
-import { Container, Row, Col, FormControl } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  FormControl,
+  Form,
+  Button,
+} from "react-bootstrap";
 import Convo from "../conversation/Convo";
+import Chatbox from "../chat/Chatbox";
 
 const Messenger = () => {
   return (
@@ -13,7 +21,27 @@ const Messenger = () => {
           <Convo />
           <Convo />
         </Col>
-        <Col sm={6}>Hello</Col>
+        <Col sm={6} className="d-flex flex-column justify-content-between">
+          <Col className="chatbox">
+            <Chatbox />
+            <Chatbox own={true} />
+            <Chatbox />
+            <Chatbox />
+            <Chatbox />
+            <Chatbox own={true} />
+            <Chatbox />
+            <Chatbox />
+            <Chatbox own={true} />
+            <Chatbox />
+            <Chatbox />
+          </Col>
+          <Col>
+            <Form>
+              <Form.Control as="textarea" rows={3} />
+              <Button className="mt-1">Send</Button>
+            </Form>
+          </Col>
+        </Col>
         <Col sm={3}>Hi</Col>
       </Row>
     </Container>
