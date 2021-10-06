@@ -3,7 +3,9 @@ const { Schema, model } = mongoose;
 
 const MessageSchema = new Schema(
   {
-    members: { type: Array },
+    conversationId: { type: String },
+    sender: { type: String },
+    text: { type: String },
   },
   { timestamps: true }
 );
