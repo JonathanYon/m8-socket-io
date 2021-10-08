@@ -11,12 +11,14 @@ import Convo from "../conversation/Convo";
 import Chatbox from "../chat/Chatbox";
 import Online from "../chatOnline/Online";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Messenger = () => {
   const users = ["615e0eaeb152175f1447b54d", "615e0efcb152175f1447b54f"];
   const [convo, setConvo] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
+  const [newMessage, setNewMessage] = useState("");
   useEffect(() => {
     const getConvo = async () => {
       try {
@@ -46,6 +48,31 @@ const Messenger = () => {
     };
     getMessages();
   }, [currentChat]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const message = {
+      sender: users[1],
+      text: newMessage,
+      conversationId: currentChat,
+    };
+    try {
+      // const response = await fetch(`http://localhost:3003/messages`, {
+      //   method: "POST",
+      //   body: JSON.stringify(message),
+      //   headers: { "Content-Type": "application/json" },
+      // });
+      const response = await axios.post(
+        `http://localhost:3003/messages`,
+        message
+      );
+      setMessages([...messages, response]);
+      setNewMessage("");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   console.log(messages);
 
   return (
@@ -66,7 +93,7 @@ const Messenger = () => {
                 {messages?.map((message) => (
                   <Chatbox
                     message={message}
-                    own={message.sender === users[1] && message.sender}
+                    own={message.sender === users[1]}
                   />
                 ))}
               </>
@@ -76,8 +103,15 @@ const Messenger = () => {
           </Col>
           <Col>
             <Form>
-              <Form.Control as="textarea" rows={3} />
-              <Button className="mt-1">Send</Button>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                value={newMessage}
+                onChange={(e) => setNewMessage(e.target.value)}
+              />
+              <Button className="mt-1" onClick={handleSubmit}>
+                Send
+              </Button>
             </Form>
           </Col>
         </Col>
