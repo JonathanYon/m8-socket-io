@@ -3,6 +3,7 @@ import "./chatbox.css";
 import { format } from "timeago.js";
 
 const Chatbox = ({ message, own }) => {
+  console.log(own);
   return (
     // <Container>
     <Row className="d-flex flex-column mt-2 ">
