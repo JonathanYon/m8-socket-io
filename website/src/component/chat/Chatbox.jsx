@@ -1,7 +1,8 @@
 import { Col, Row } from "react-bootstrap";
 import "./chatbox.css";
+import { format } from "timeago.js";
 
-const Chatbox = ({ own }) => {
+const Chatbox = ({ message, own }) => {
   return (
     // <Container>
     <Row className="d-flex flex-column mt-2 ">
@@ -20,10 +21,10 @@ const Chatbox = ({ own }) => {
           className={own ? "bg-light rounded px-3" : "bg-primary rounded px-3"}
           style={{ maxWidth: "50%" }}
         >
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia
+          {message.text}
         </p>
       </Col>
-      <Col className="">1 hour ago</Col>
+      <Col className="">{format(message.createdAt)}</Col>
     </Row>
     // <Row></Row>
     // </Container>
